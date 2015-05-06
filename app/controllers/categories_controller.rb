@@ -1,6 +1,7 @@
 class CategoriesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy, :create]
-  
+  before_action :user_is_admin?, only: [:new, :edit, :create, :update, :destroy]
+
   expose(:categories)
   expose(:category)
   expose(:product) { Product.new }

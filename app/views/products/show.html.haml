@@ -1,25 +1,38 @@
-%p#notice= notice
-%p#error= flash[:error]
+- if notice.present?
+	.alert.alert-success= notice
+- if flash[:error].present?
+	.alert.alert-danger= flash[:error]
 
-%p
-  %b Title:
-  = product.title
-%p
-  %b Description:
-  = product.description
-%p
-  %b Price:
-  = product.price
+.row
+	.col-md-6
+		.jumbotron
+			.btn-group.pull-right
+				- if user_is_product_owner?(product) || user_is_admin?
+					= link_to 'Edit product', edit_category_product_path(category.id, product.id), class: 'btn btn-primary'
+				= link_to "Back to category", category_path(category.id), class: 'btn btn-primary'
+			%h3
+				%b=product.title
+			.well.well-sm
+				%h4= product.description
+				%hr
+				%span
+					Price:
+				%span="#{product.price} "
+				- if user_is_admin?
+					%hr
+					=product.created_at_by_user
 
-%p
-  %b Category
-  = product.category.name
+		- if user_signed_in?			
+			.panel.panel-default
+				.panel-heading
+					%h4 Add new review
+				.panel-body		
+					= render 'reviews/form'
+	.col-md-6
+		.panel.panel-default
+			.panel-heading
+				%h4 Reviews list
+			%ul.list-group
+				= render reviews
 
-%h3 Reviews
-= render 'reviews/form'
 
-= render reviews
-
-= link_to 'Edit', edit_category_product_path(category.id, product.id)
-\|
-= link_to 'Back', category_products_path, class: 'btn btn-primary'

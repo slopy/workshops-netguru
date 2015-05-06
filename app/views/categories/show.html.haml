@@ -1,17 +1,32 @@
-%p#notice= notice
+- if notice.present?
+	.alert.alert-success= notice
 
-%p
-  %b Name:
-  = category.name
+.panel.panel-default
+	.panel-heading
+		.btn-group.pull-right.hidden-xs
+			- if user_is_admin?
+				= link_to 'Edit category', edit_category_path(category), class: "btn btn-primary"
+			= link_to 'Category list', categories_path, class: 'btn btn-primary'
 
-%p
-  - category.products.each do |product|
-    = product.title
+		.btn-group.visible-xs
+			- if user_is_admin?
+				= link_to 'Edit category', edit_category_path(category), class: "btn btn-primary"
+			= link_to 'Category list', categories_path, class: 'btn btn-primary'
+			%br
+			%br
 
-%p
-  %h3 New product
-  = render 'products/form'
+		%h4="Category: #{category.name}"
+		- if user_signed_in?
+			= link_to "Add new product", :anchor=>"add_new_product"
+			\|
+			= link_to "Product list in this category", category_products_path(category,product)
 
-= link_to 'Edit', edit_category_path(category)
-\|
-= link_to 'Back', categories_path, class: 'btn btn-primary'
+	.panel-body
+		=render 'category_products'
+
+-if user_signed_in?
+	.panel.panel-default#add_new_product
+		.panel-heading
+			%h4="New product in #{category.name}"
+		.panel-body
+			= render 'products/form'

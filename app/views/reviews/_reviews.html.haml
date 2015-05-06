@@ -1,0 +1,16 @@
+%table.table
+  %tr
+    %th Content
+    %th Product
+    %th Rating
+    %th Created at
+
+  - reviews.each do |review|
+    %tr
+      %td= review.content
+      %td 
+        = link_to(category_product_path(review.product.category, review.product)) do
+          =review.product.title
+      %td= review.rating
+      %td= review.created_at
+%br

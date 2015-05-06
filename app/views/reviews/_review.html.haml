@@ -1,4 +1,10 @@
-%p= review.content
-%p
-  %b= review.rating
-  %em= review.author
+%li.list-group-item
+	%span.pull-right= "rating: #{review.rating}"
+	%em=review.author
+	%span= " wrote:"
+
+	.well.well-sm
+		=review.content
+		- if user_is_admin?
+			= link_to(category_product_review_path(category, product, review), method: :delete, data: { confirm: 'Are you sure?' }) do
+				%span.glyphicon.glyphicon-remove.pull-right

@@ -1,0 +1,27 @@
+.row 
+	.col-md-5
+		.jumbotron.text-center
+			- if user_is_admin?
+				asd
+			%h2
+				%span.glyphicon.glyphicon-user
+				=user.firstname
+				=user.lastname
+			%p=user.email
+			.progress.text-center
+				.progress-bar.progress-bar-danger.progress-bar-striped{"role"=>"progressbar",
+				 "aria-valuenow"=>"#{user.products_count}", "aria-valuemin"=>"0", "aria-valuemax"=>"#{products_total_amount}", "style"=>"width: #{user.products_percent_in_total}"}
+					%span="#{user.products_percent_in_total} of products added by #{user.firstname}"
+			.progress.text-center
+				.progress-bar.progress-bar-danger{"role"=>"progressbar",
+				 "aria-valuenow"=>"#{user.reviews_count}", "aria-valuemin"=>"0", "aria-valuemax"=>"#{reviews_total_amount}", "style"=>"width: #{user.reviews_percent_in_total}"}
+					%span="#{user.reviews_percent_in_total} of reviews added by #{user.firstname}"
+	.col-md-7
+		.panel.panel-default
+			.panel.panel-heading
+				%h5 Recently added products
+			=render 'products/products'
+		.panel.panel-default
+			.panel.panel-heading
+				%h5 Recently added reviews
+			=render 'reviews/reviews'

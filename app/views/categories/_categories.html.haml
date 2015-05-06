@@ -1,0 +1,24 @@
+- categories.each do |category|
+  =link_to(category,:class=>"list-group-item category-list") do
+    %strong
+      %span=category.name
+    %br 
+    %br
+    %small
+      %span='Has '
+      %span.badge="#{category.products.count}"
+      %span=' products'
+      -if user_signed_in?
+        %br
+        %span="Created at: #{category.created_at.strftime('%d/%m/%y')}"  
+
+  - if user_is_admin?
+    .btn-group.btn-group-xs
+      = link_to(edit_category_path(category), method: :get, :class=>"btn btn-default") do 
+        %small
+          %span.glyphicon.glyphicon-edit
+          %span="Edit"
+      = link_to(category, method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-default") do
+        %small
+          %span.glyphicon.glyphicon-trash
+          %span="Destroy"

@@ -1,5 +1,8 @@
-%h1 New category
+.panel.panel-default
+	.panel-heading
+		.btn-group.pull-right
+			= link_to 'Listing categories', categories_path, class: 'btn btn-primary'
+		%h4 New category
+	.panel-body
+		= render 'form'
 
-= render 'form'
-
-= link_to 'Back', categories_path, class: 'btn btn-primary'

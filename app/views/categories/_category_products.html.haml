@@ -1,0 +1,23 @@
+.row
+	- category.products.each do |product|
+		.col-xs-6.col-sm-4.col-md-3
+			.panel.panel-default
+				.panel-heading
+					= link_to "#{product.title}", category_product_path(category,product)
+					- if user_is_product_owner?(product) || user_is_admin?
+						= link_to(category_product_path(category, product), method: :delete, data: { confirm: 'Are you sure?' },
+						 class: "pull-right hidden-xs") do
+							%span.glyphicon.glyphicon-trash
+						= link_to(edit_category_product_path(product.category, product), class: "pull-right hidden-xs") do
+							%span.glyphicon.glyphicon-edit
+
+				%p= product.description
+				%small="Price: #{product.price}"
+				\|
+				%small
+					%span='Reviews: '
+					%span.badge="#{product.reviews.count}"
+				\|
+				%small
+					%span='Average: '
+					%span.badge="#{number_with_precision(product.average_rating, precision: 2)}"

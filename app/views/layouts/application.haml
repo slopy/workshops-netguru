@@ -12,9 +12,29 @@
     %nav.navbar.navbar-default
       .container-fluid
         .navbar-header
-          %span.navbar-brand #{AppConfig.workshops_name}
-        %p.navbar-text.navbar-right
-          Links should go here
+          =link_to root_url do
+            %span.navbar-brand.glyphicon.glyphicon-home
+            %span.navbar-brand.hidden-xs #{AppConfig.workshops_name}
+        .navbar-collapse
+          - if user_signed_in?
+            %ul.nav.navbar-nav.navbar-right
+              %li.dropdown
+                %a.dropdown-toggle{:href => "#", "role" => "button", "data-toggle" => "dropdown", "data-target" => "#"} 
+                  %span.glyphicon.glyphicon-user
+                  %span="#{current_user.email}"
+                  %b.caret
+                %ul.dropdown-menu{"role" => "menu"}
+                  %li{"role"=>"presentation"}
+                    = link_to "Show Profile", user_profile_path(current_user)
+                  %li{"role"=>"presentation"}
+                    = link_to "Edit Profile", edit_user_registration_path
+                  %li{"role"=>"presentation"}
+                    = link_to "Logout", destroy_user_session_path, :method=>:delete
+          - else
+            %ul.nav.navbar-nav.navbar-right
+              %li= link_to "Sign up", new_user_registration_path, class: "navbar-link"
+              %li= link_to "Login", new_user_session_path, class: "navbar-link"
+
     .container-fluid
       .row
         .col-lg-12

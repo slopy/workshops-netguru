@@ -1,7 +1,10 @@
-%h1 Editing category
+.panel.panel-default
+	.panel-heading
+		.btn-group.pull-right
+			= link_to 'Listing categories', categories_path, class: 'btn btn-primary'
+			= link_to 'Show category', category, class: 'btn btn-primary'
+		%h4="Editing category: #{category.name}"
+	.panel-body
+		= render 'form'
 
-= render 'form'
 
-= link_to 'Show', category
-\|
-= link_to 'Back', categories_path, class: 'btn btn-primary'

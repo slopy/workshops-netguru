@@ -1,0 +1,32 @@
+%table.table
+  %tr
+    %th Title
+    %th.hidden-xs Description
+    %th.hidden-xs Reviews
+    %th Price
+    %th
+    %th
+
+
+  - products.each do |product|
+    %tr
+      %td= link_to product.title, category_product_path(product.category, product)
+      %td.hidden-xs= product.description
+      %td 
+        %span.badge=product.reviews.count
+      %td= product.price
+      - if user_is_product_owner?(product) || user_is_admin?
+        %td
+          = link_to(edit_category_product_path(product.category, product)) do
+            %small
+              %span.glyphicon.glyphicon-edit
+              %span="Edit"
+        %td
+          = link_to(category_product_path(product.category, product), method: :delete, data: { confirm: 'Are you sure?' }) do
+            %small
+              %span.glyphicon.glyphicon-trash
+              %span="Destroy"           
+      - else
+        %td
+        %td
+%br
