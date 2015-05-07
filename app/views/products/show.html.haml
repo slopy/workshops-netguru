@@ -15,9 +15,9 @@
 			.well.well-sm
 				%h4= product.description
 				%hr
-				%span
-					Price:
-				%span="#{product.price} "
+				%span.badge="#{product.price} €"
+				%span.pull-right
+					%small="#{product.created_at}"
 				- if user_is_admin?
 					%hr
 					=product.created_at_by_user

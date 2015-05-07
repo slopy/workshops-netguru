@@ -10,7 +10,7 @@
       %span=' products'
       -if user_signed_in?
         %br
-        %span="Created at: #{category.created_at.strftime('%d/%m/%y')}"  
+        %span="Created at #{category.created_at.strftime('%d-%m-%y')}"  
 
   - if user_is_admin?
     .btn-group.btn-group-xs

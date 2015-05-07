@@ -11,13 +11,14 @@
 						= link_to(edit_category_product_path(product.category, product), class: "pull-right hidden-xs") do
 							%span.glyphicon.glyphicon-edit
 
-				%p= product.description
-				%small="Price: #{product.price}"
-				\|
+				%p.text-center= product.description
 				%small
-					%span='Reviews: '
+					%span.badge="#{product.price} €"
+				%br
+				%small.hidden-xs
 					%span.badge="#{product.reviews.count}"
-				\|
-				%small
-					%span='Average: '
+					%span='- reviews in product'
+				%br
+				%small.hidden-xs
 					%span.badge="#{number_with_precision(product.average_rating, precision: 2)}"
+					%span='- average product rating'

@@ -1,7 +1,8 @@
 %li.list-group-item
 	%span.pull-right= "rating: #{review.rating}"
 	%em=review.author
-	%span= " wrote:"
+	%span= " wrote at "
+	%span= review.created_at
 
 	.well.well-sm
 		=review.content

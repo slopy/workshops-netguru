@@ -6,9 +6,13 @@ class ProductDecorator < Draper::Decorator
   #
     def created_at_by_user
       h.content_tag :span, class: 'time' do
-        "Created at: " + object.created_at.strftime("%d/%m/%y") +
+        "Created at: " + object.created_at.strftime("%d-%m-%y") +
          " by " + object.user.firstname + " " + object.user.lastname
       end
+    end
+
+    def created_at
+      object.created_at.strftime("%d-%m-%y")
     end
 
 end
