@@ -2,12 +2,11 @@
 	.col-md-5
 		.jumbotron.text-center
 			- if user_is_admin?
-				asd
-			%h2
-				%span.glyphicon.glyphicon-user
-				=user.firstname
-				=user.lastname
-			%p=user.email
+				%h2
+					%span.glyphicon.glyphicon-user
+					=user.firstname
+					=user.lastname
+				%p=user.email
 			.progress.text-center
 				.progress-bar.progress-bar-danger.progress-bar-striped{"role"=>"progressbar",
 				 "aria-valuenow"=>"#{user.products_count}", "aria-valuemin"=>"0", "aria-valuemax"=>"#{products_total_amount}", "style"=>"width: #{user.products_percent_in_total}"}
